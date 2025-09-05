@@ -1,36 +1,114 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Hospital Management System
 
-## Getting Started
+A full-stack hospital management web application built with Next.js, TypeScript, MongoDB, and Node.js. This platform centralizes healthcare services, providing patients and hospitals a unified system to access and manage medical resources efficiently.
 
-First, run the development server:
+🌍 Real-World Problem
 
-```bash
+In cities like Mumbai, there is no centralized platform where users can:
+
+Check available hospital beds, ICUs, or blood units in real time
+
+Compare hospitals based on cost, ratings, and services
+
+Book appointments without calling multiple hospitals
+
+This project solves this by integrating all public and private hospitals under one platform, making healthcare affordable, transparent, and efficient.
+
+👥 User Roles & Flow
+1️⃣ User (Patient) Flow
+
+Signup/Login as a patient
+
+Search hospitals or doctors by illness, specialization, or location
+
+View bed and blood availability in nearby hospitals
+
+Book appointments with hospitals or doctors
+
+View past appointments and leave reviews
+
+Future: AI chatbot, video consultation, and history tracking
+
+2️⃣ Hospital Flow
+
+Signup/Login as a hospital admin
+
+Manage beds and ICU availability
+
+Update blood bank inventory
+
+Add and manage doctors
+
+View and update appointment statuses (confirmed, completed, canceled)
+
+Respond to patient reviews
+
+✨ Features
+
+Multi-user role-based system (Users & Hospitals)
+
+JWT-based authentication
+
+Real-time bed & blood availability
+
+Appointment booking and management
+
+Hospital & doctor reviews and ratings
+
+RESTful APIs with Next.js App Router
+
+Frontend built with React/Next.js + TypeScript + Tailwind
+
+MongoDB database for multi-user management
+
+Ready for AI chatbot, video consultation, and Google Maps integration
+
+🏗 Tech Stack
+
+Frontend: Next.js, TypeScript, Tailwind CSS
+
+Backend: Next.js API routes (Node.js)
+
+Database: MongoDB
+
+HTTP Requests: Axios
+
+Authentication: JWT (role-based)
+
+🚀 Getting Started
+
+Clone the repo:
+
+git clone https://github.com/tiwarishivam-pixel/hospitalManagement.git
+cd hospitalManagement
+
+
+Install dependencies:
+
+npm install
+
+
+Set environment variables in .env.local:
+
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_secret_key
+
+
+Run the development server:
+
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Open http://localhost:3000
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+🔮 Future Enhancements
 
-## Learn More
+AI-powered health chatbot
 
-To learn more about Next.js, take a look at the following resources:
+Video consultation with doctors
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Google Maps integration for nearest hospitals
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Multi-language support
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Advanced analytics for hospitals
