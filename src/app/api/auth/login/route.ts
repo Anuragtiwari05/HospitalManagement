@@ -1,11 +1,10 @@
-// setup login route
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import connectDB from "@/dbconfig/dbconfig";
 import User from "@/models/user.model";
 
-const JWT_SECRET = process.env.JWT_SECRET || "supersecretkey"; // put strong secret in .env.local
+const JWT_SECRET = process.env.JWT_SECRET || "supersecretkey"; // strong secret in .env.local
 
 export async function POST(req: Request) {
   try {
@@ -18,7 +17,9 @@ export async function POST(req: Request) {
     }
 
     const user = await User.findOne({ email });
-    if (!user) {
+
+    // Only allow login for patients (USER) via this route
+    if (!user || user.role !== "USER") {
       return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
     }
 

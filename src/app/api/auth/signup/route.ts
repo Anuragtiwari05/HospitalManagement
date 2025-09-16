@@ -2,22 +2,16 @@ import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import connectDB from "@/dbconfig/dbconfig";
 import User from "@/models/user.model";
-import Hospital from "@/models/hospital.model";
 
 export async function POST(req: Request) {
   try {
     await connectDB();
 
-    const { name, email, password, role, hospitalName, address, phone, services } =
-      await req.json();
+    const { name, email, password } = await req.json();
 
-    // Basic validation
-    if (!name || !email || !password || !role) {
+    // Validation
+    if (!name || !email || !password) {
       return NextResponse.json({ error: "All fields are required" }, { status: 400 });
-    }
-
-    if (!["USER", "HOSPITAL", "ADMIN"].includes(role)) {
-      return NextResponse.json({ error: "Invalid role" }, { status: 400 });
     }
 
     // Check if user already exists
@@ -29,35 +23,17 @@ export async function POST(req: Request) {
     // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Create user
+    // Create patient user
     const user = await User.create({
       name,
       email,
       password: hashedPassword,
-      role,
+      role: "USER", // hardcoded, cannot choose role
     });
-
-    // If role is HOSPITAL, create hospital document
-    if (role === "HOSPITAL") {
-      if (!hospitalName || !address || !phone) {
-        return NextResponse.json(
-          { error: "Hospital name, address, and phone are required" },
-          { status: 400 }
-        );
-      }
-
-      await Hospital.create({
-        user: user._id,
-        name: hospitalName,
-        address,
-        phone,
-        services: services || [],
-      });
-    }
 
     return NextResponse.json(
       {
-        message: "User registered successfully",
+        message: "Patient registered successfully",
         user: {
           id: user._id,
           name: user.name,
