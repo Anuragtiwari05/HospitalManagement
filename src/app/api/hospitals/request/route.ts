@@ -23,19 +23,18 @@ export async function POST(req: Request) {
     }
 
     // Create new hospital request
-    const request = await HospitalRequest.create({
+    await HospitalRequest.create({
       name,
       email,
       address,
       phone,
       licenseNumber,
-      status: "PENDING",
+      status: "PENDING", // kept for internal admin tracking
     });
 
+    // Return only success message
     return NextResponse.json({
       message: "Hospital registration request submitted successfully",
-      requestId: request._id,
-      status: request.status,
     }, { status: 201 });
 
   } catch (err) {
