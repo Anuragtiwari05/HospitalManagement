@@ -1,4 +1,5 @@
-import jwt, { JwtPayload, Secret } from "jsonwebtoken";
+// src/utils/auth.ts
+import jwt, { JwtPayload, Secret, SignOptions } from "jsonwebtoken";
 
 // Ensure JWT_SECRET is defined
 const JWT_SECRET = process.env.JWT_SECRET;
@@ -9,18 +10,22 @@ if (!JWT_SECRET) {
 // Type assertion to satisfy TypeScript
 const SECRET: Secret = JWT_SECRET;
 
+// Type-safe expiresIn: number (seconds) or string like "1d", "2h", "30m", "10s"
+type ExpiresIn = number | `${number}${"d" | "h" | "m" | "s"}`;
+
 // Generate JWT token
 export function generateToken(
   payload: Record<string, any>,
-  expiresIn: string = "1d"
+  expiresIn: ExpiresIn = "1d"
 ): string {
-  return jwt.sign(payload, SECRET, { expiresIn });
+  const options: SignOptions = { expiresIn };
+  return jwt.sign(payload, SECRET, options);
 }
 
 // Verify JWT token
 export function verifyToken(token: string): string | JwtPayload | null {
   try {
-    return jwt.verify(token, SECRET);
+    return jwt.verify(token, SECRET) as string | JwtPayload;
   } catch {
     return null;
   }
