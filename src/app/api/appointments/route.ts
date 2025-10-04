@@ -7,7 +7,7 @@ import jwt from "jsonwebtoken";
 
 const JWT_SECRET = process.env.JWT_SECRET || "supersecretkey";
 
-
+//jwt verification middleware
 async function verifyToken(req: Request) {
   const authHeader = req.headers.get("Authorization");
   if (!authHeader) return null;
